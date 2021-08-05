@@ -15,7 +15,7 @@ class SaleOrderLine(models.Model):
 
     @api.depends('product_id')
     def _compute_product_customer_code(self):
-        for line in self.filtered(lambda sol: sol.order_partner_id.customer):
+        for line in self:
             supplierinfo = self.get_customer_supplierinfo(line)
             line.product_customer_code = supplierinfo.product_code
 
